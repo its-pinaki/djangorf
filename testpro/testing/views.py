@@ -6,16 +6,32 @@ from testing.models import Student,Book
 
 def getbook(request):
     data={}
+    data['books']={}
     # convert queryset to list
     book = list(Book.objects.values())
+    
+    # accessing all queryset data
     book1 = Book.objects.all()
+    for bo1 in book1:
+        print(bo1.name)
+        print(bo1.student.name)
+
+
+    # print(book1)
     for i in book1:
-        data['id_'+ str(i.id)]=i.id
-    for k,v in data.items():
-        b = Book.objects.filter(id=data[k])
-        for bo in b:
-            data[k]=bo.name
-    print(data)
+        data['books']['books'+str(i.id)]={}
+        data['books']['books'+str(i.id)]['bookname']=i.name
+        # accessing foreign key field with its parent model attributes
+        data['books']['books'+str(i.id)]['student']=i.student.name
+    
+    # accessing filtered queryset data
+    b = Book.objects.filter(id=6)
+    for bo in b:
+        print(bo.name)
+        print(bo.student.name)
+
+
+    book.append(data)
     # returning jsonresponse with 'safe=false'
     return JsonResponse(book,safe=False)
 
