@@ -13,8 +13,9 @@ def getbook(request):
     # accessing all queryset data
     book1 = Book.objects.all()
     for bo1 in book1:
-        print(bo1.name)
-        print(bo1.student.name)
+        pass
+        # print(bo1.name)
+        # print(bo1.student.name)
 
 
     # print(book1)
@@ -23,12 +24,12 @@ def getbook(request):
         data['books']['books'+str(i.id)]['bookname']=i.name
         # accessing foreign key field with its parent model attributes
         data['books']['books'+str(i.id)]['student']=i.student.name
-    
-    # accessing filtered queryset data
-    b = Book.objects.filter(id=6)
+    print(data)
+    # accessing filtered queryset data with value
+    b = Book.objects.filter(id=6).values()
     for bo in b:
-        print(bo.name)
-        print(bo.student.name)
+        print(bo['name'])
+        # print(bo.student.name)
 
 
     book.append(data)
