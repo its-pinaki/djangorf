@@ -3,7 +3,7 @@ from testing.models import Book
 from django.http import JsonResponse
 from testing.models import Student,Book
 # Create your views here.
-
+#this is updated version views
 def getbook(request):
     data={}
     data['books']={}
